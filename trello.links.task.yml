@@ -1,0 +1,5 @@
+trello_export_page:
+  title: Trello
+  route_name: trello.trello_export_page
+  base_route: entity.user.canonical
+  weight: 5

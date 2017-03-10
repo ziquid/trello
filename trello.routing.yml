@@ -1,0 +1,7 @@
+trello.trello_export_page:
+  path: '/user/{user}/trello'
+  defaults:
+    _controller: '\Drupal\trello\Controller\UserTrelloPage::trelloExportPage'
+    _title: 'Trello Export'
+  requirements:
+    _permission: 'access content'

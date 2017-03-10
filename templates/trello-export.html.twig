@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Theme for a Trello Export.
+ *
+ * Available variables:
+ * - cards: array of cards with card details
+ *
+ * @ingroup themeable
+ */
+#}
+<h2>Card Data</h2>
+
+{% for card in cards %}
+  <div class="content">
+  <h3>{{ card.name }}</h3>
+  <div>
+  {{ card.due|date("l m/d/Y") }}
+  <br />{{ card.desc }}
+  <ul>
+  {% for label in card.labels %}
+    <li>Label: {{ label.name }}</li>
+  {% endfor %}
+  {% for member in card.members %}
+    <li>Member: {{ member.fullName }}</li>
+  {% endfor %}
+  <li>Votes: {{ card.badges.votes }}</li>
+  <li>Comments: {{ card.badges.comments }}</li>
+  <ul>
+  {% for action in card.actions %}
+    <li>{{ action.memberCreator.fullName }}: {{ action.data.text }}</li>
+  {% endfor %}
+  </ul>
+  </ul>
+  </div>
+  </div>
+{% endfor %}
+

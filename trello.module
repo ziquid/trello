@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Contains trello.module..
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function trello_theme() {
+  $theme = [];
+  $theme['trello_export_theme'] = [
+    'variables' => ['cards' => []],
+    'template' => 'trello-export',
+  ];
+
+  return $theme;
+}
+
+

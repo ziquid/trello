@@ -1,0 +1,5 @@
+name: Trello Integration
+type: module
+description: Integration into Trello
+core: 8.x
+package: Custom
