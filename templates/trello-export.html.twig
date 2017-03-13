@@ -10,11 +10,11 @@
  * @see https://developers.trello.com/advanced-reference/list#get-1-lists-idlist-cards
  */
 #}
-<h2>Card Export</h2>
+<h1>Card Export</h1>
 
 {% for card in cards %}
   <div class="trello-export-card">
-  <h3>{{ card.name }}</h3>
+  <h2>{{ card.name }}</h2>
   <div>
   <ul>
   {% if card.due %}
