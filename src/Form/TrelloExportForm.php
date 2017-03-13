@@ -99,11 +99,14 @@ class TrelloExportForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {}
 
-
+  /**
+   * Get list of open boards accessible to the current member.
+   */
   public function getBoardOptions() {
     $data = [];
     $path = 'members/me/boards';
     $extra = [
+      'filter' => 'open',
       'fields' => 'id,name',
     ];
     if ($response = $this->trello_service->request($path, $extra)) {
@@ -114,6 +117,9 @@ class TrelloExportForm extends FormBase {
     return $data;
   }
 
+  /**
+   * Get list of open lists on the specified board.
+   */
   public function getListOptions($board) {
     if (empty($board)) {
       return [];
@@ -121,6 +127,7 @@ class TrelloExportForm extends FormBase {
     $data = [];
     $path = 'board/' . $board . '/lists' ;
     $extra = [
+      'cards' => 'open',
       'fields' => 'id,name',
     ];
     if ($response = $this->trello_service->request($path, $extra)) {
@@ -145,12 +152,19 @@ class TrelloExportForm extends FormBase {
 
     $response = new AjaxResponse();
 
+    /**
+     * Get the specified fields for all open cards on this list.
+     */
     $list = $form_state->getValue('list');
     $path = 'list/' . $list . '/cards';
     $extra = [
+      'filter' => 'open',
       'members' => 'true',
       'member_fields' => 'fullName',
       'actions' => 'commentCard',
+      'attachments' => 'true',
+      'attachment_fieldss' => 'name,url',
+      'checklists' => 'all',
     ];
     $cards = $this->trello_service->request($path, $extra);
 

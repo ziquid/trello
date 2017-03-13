@@ -7,23 +7,62 @@
  * - cards: array of cards with card details
  *
  * @ingroup themeable
+ * @see https://developers.trello.com/advanced-reference/list#get-1-lists-idlist-cards
  */
 #}
-<h2>Card Data</h2>
+<h2>Card Export</h2>
 
 {% for card in cards %}
-  <div class="content">
+  <div class="trello-export-card">
   <h3>{{ card.name }}</h3>
   <div>
-  {{ card.due|date("l m/d/Y") }}
-  <br />{{ card.desc }}
+  <ul>
+  {% if card.due %}
+    <li>Due: {{ card.due|date("l m/d/Y") }} </li>
+  {% endif %}
+    <li>Last Activity: {{ card.dateLastActivity|date("l m/d/Y") }}</li>
+  </ul>
+  
+  {{ card.desc }}
+
+  {% if attachments %}
+  <h3>Attachments</h3>
+  <ul>
+  {% for attachment in attachments %}
+    <li>{{ attachment.name}}: {{attachment.url}}</li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+  
+  {% if checklists %}
+  <h3>{{ checklist.name }}<h3>
+  <ul>
+  {% for checklist in checklists.checkItems %}
+    <li>{{ checklist.name }}: {{ checklist.state }}</li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if card.labels %}
+  <h3>Labels</h3>
   <ul>
   {% for label in card.labels %}
-    <li>Label: {{ label.name }}</li>
+    <li>{{ label.name }}</li>
   {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if card.members %}
+  <h3>Assigned to</h3>
+  <ul>
   {% for member in card.members %}
-    <li>Member: {{ member.fullName }}</li>
+    <li>{{ member.fullName }}</li>
   {% endfor %}
+  </ul>
+  {% endif %}
+
+  <h3>Other Information</h3>
+  <ul>
   <li>Votes: {{ card.badges.votes }}</li>
   <li>Comments: {{ card.badges.comments }}</li>
   <ul>
