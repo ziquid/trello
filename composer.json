@@ -2,5 +2,5 @@
     "name":              "ziquid/trello",
     "description":       "Trello integration for Drupal 8, forked from Lullabot/trello.",
     "type":              "drupal-module",
-    "homepage":          "https://github.com/ziquid/trello",
+    "homepage":          "https://github.com/ziquid/trello"
 }
