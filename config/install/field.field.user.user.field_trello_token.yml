@@ -10,7 +10,7 @@ field_name: field_trello_token
 entity_type: user
 bundle: user
 label: 'Trello Token'
-description: 'Generate your Trello user token at https://trello.com/app-key.'
+description: "Generate your Trello user token at <a href=\"https://trello.com/app-key\" target=\"_blank\">https://trello.com/app-key</a>.\r\n"
 required: false
 translatable: false
 default_value: {  }

@@ -10,7 +10,7 @@ field_name: field_trello_key
 entity_type: user
 bundle: user
 label: 'Trello Key'
-description: 'Retrieve your Trello user key from https://trello.com/app-key.'
+description: "Retrieve your Trello user key from <a href=\"https://trello.com/app-key\" target=\"_blank\">https://trello.com/app-key</a>.\r\n"
 required: false
 translatable: false
 default_value: {  }
