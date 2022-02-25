@@ -10,7 +10,7 @@ namespace Drupal\trello;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
-use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 class TrelloService {
 
@@ -18,7 +18,7 @@ class TrelloService {
    * @var AccountInterface $current_user
    */
   protected $current_user;
-  protected $entity_manager;
+  protected $entity_type_manager;
   protected $base_path;
   protected $trello_token;
   protected $trello_key;
@@ -26,14 +26,14 @@ class TrelloService {
   /**
    * When the service is created, set variables.
    */
-  public function __construct(AccountInterface $current_user, EntityManagerInterface $entity_manager) {
+  public function __construct(AccountInterface $current_user, EntityTypeManagerInterface $entity_type_manager) {
 
     $this->current_user = $current_user;
-    $this->entity_manager = $entity_manager;
+    $this->entity_type_manager = $entity_type_manager;
     $this->setValue('base_path', 'https://api.trello.com/1');
 
     // Set the key and token of the current user, if available.
-    $user_storage = $this->entity_manager->getStorage('user');
+    $user_storage = $this->entity_type_manager->getStorage('user');
     $user = $user_storage->load($this->current_user->id());
     $key = $user->get('field_trello_key')->value;
     $token = $user->get('field_trello_token')->value;
@@ -49,7 +49,7 @@ class TrelloService {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('current_user'),
-      $container->get('entity.manager')
+      $container->get('entity_type.manager')
     );
   }
 

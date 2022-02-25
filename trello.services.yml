@@ -1,4 +1,4 @@
 services:
   trello.trello_service:
     class: Drupal\trello\TrelloService
-    arguments: ['@current_user', '@entity.manager']
+    arguments: ['@current_user', '@entity_type.manager']
